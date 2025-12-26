@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # Infrastructure Monitoring Service
+  oran-monitoring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - CONFIG_PATH=/app/config/production.yaml
+      # RMR Configuration
+      - RMR_RTG_SVC=${RMR_RTG_SVC:-routemgr:4561}
+      - RMR_SRC_ID=${RMR_SRC_ID:-monitoring-prod}
+      - RMR_RTREQ_FREQ=${RMR_RTREQ_FREQ:-5}
+      # API Keys
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
+      - HERE_API_KEY=${HERE_API_KEY}
+      - ORAN_AUTH_TOKEN=${ORAN_AUTH_TOKEN}
+      - PROBE_API_KEY=${PROBE_API_KEY}
+      - ERICSSON_API_TOKEN=${ERICSSON_API_TOKEN}
+    volumes:
+      - ./config:/app/config:ro
+    restart: unless-stopped
+    networks:
+      - oran-net
+
+  # Development variant
+  oran-monitoring-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+      - CONFIG_PATH=/app/config/development.yaml
+    volumes:
+      - ./config:/app/config:ro
+    restart: unless-stopped
+    networks:
+      - oran-net
+
+  # Staging variant
+  oran-monitoring-staging:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    environment:
+      - NODE_ENV=staging
+      - CONFIG_PATH=/app/config/staging.yaml
+      # RMR Configuration
+      - RMR_RTG_SVC=${RMR_RTG_SVC:-staging-routemgr:4561}
+      - RMR_SRC_ID=${RMR_SRC_ID:-monitoring-staging}
+      - RMR_RTREQ_FREQ=${RMR_RTREQ_FREQ:-10}
+      # API Keys (staging)
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
+      - HERE_API_KEY=${HERE_API_KEY}
+      - ORAN_AUTH_TOKEN=${ORAN_AUTH_TOKEN}
+    volumes:
+      - ./config:/app/config:ro
+    restart: unless-stopped
+    networks:
+      - oran-net
+
+networks:
+  oran-net:
+    driver: bridge

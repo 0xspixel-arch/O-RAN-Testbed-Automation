@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["shared/*"],
+      "@android/*": ["android/*"],
+      "@infrastructure/*": ["infrastructure/*"],
+      "@ui/*": ["ui/*"]
+    }
+  },
+  "include": [
+    "shared/**/*",
+    "infrastructure/**/*",
+    "android/**/*",
+    "index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "ui",
+    "android/app",
+    "android/native/build"
+  ]
+}

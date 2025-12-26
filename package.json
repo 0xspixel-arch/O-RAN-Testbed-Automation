@@ -1,0 +1,49 @@
+{
+  "name": "oran-unified-monitoring",
+  "version": "1.0.0",
+  "description": "Unified O-RAN monitoring platform for device and infrastructure environments",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.full.json",
+    "watch": "tsc -w -p tsconfig.full.json",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest",
+    "build:android": "cd android && (if exist gradlew.bat (gradlew.bat assembleRelease) else (./gradlew assembleRelease))",
+    "start:ui": "cd ui && npm start",
+    "start:infrastructure": "node dist/infrastructure/server.js",
+    "prestart:infrastructure": "npm run build"
+  },
+  "keywords": [
+    "oran",
+    "5g",
+    "telemetry",
+    "monitoring",
+    "android",
+    "infrastructure"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@types/ws": "^8.5.10",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ws": "^8.14.2",
+    "yaml": "^2.3.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jest": "^29.7.0",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^8.47.0"
+  }
+}

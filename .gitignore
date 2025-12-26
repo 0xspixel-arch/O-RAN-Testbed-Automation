@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+dist/
+build/
+
+# Android
+android/.gradle/
+android/app/build/
+android/.idea/
+*.iml
+local.properties
+
+# Environment variables
+.env
+.env.local
+*.key
+*.token
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+*.apk
+*.aab
+*.jar
+ui/dist/
+ui/node_modules/
+
+# Config with secrets
+config/*.local.yaml
+config/*.secret.yaml
+
